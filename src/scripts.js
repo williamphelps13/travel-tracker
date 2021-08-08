@@ -1,10 +1,37 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
 
-// An example of how you tell webpack to use a CSS (SCSS) file
+import {fetchData, postData} from './apiCalls';
+import domUpdates from './domUpdates';
 import './css/base.scss';
+import MicroModal from 'micromodal';
+import Glide from '@glidejs/glide';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+// const loginButton = document.getElementById('login-button');
+// loginButton.addEventListener('click', openModal);
+window.addEventListener('load', openModal);
 
-console.log('This is the JavaScript entry file - your code begins here.');
+function openModal() {
+  MicroModal.show('login-modal');
+};
+
+const config = {
+  type: 'carousel',
+  perView: 2,
+  gap: 20,
+  animationDuration: 500,
+  focusAt: 'center',
+  breakpoints: {
+    800: {
+      perView: 2
+    },
+    480: {
+      perView: 1
+    }
+  }
+};
+
+new Glide('.glide', config).mount();
+
+
+
+
+
