@@ -1,0 +1,7 @@
+const fetchData = () => {
+
+}
+
+const postData = () => {
+  
+}
