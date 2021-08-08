@@ -1,18 +1,15 @@
-
-import {fetchData, postData} from './apiCalls';
-import domUpdates from './domUpdates';
+// IMPORTS
 import './css/base.scss';
 import MicroModal from 'micromodal';
 import Glide from '@glidejs/glide';
+import dayjs from 'dayjs';
+import Traveler from './Traveler'
+import TripRepo from './TripRepo'
+import Trip from './Trip'
+import {getData, postData} from './apiCalls';
+import domUpdates from './domUpdates';
 
-// const loginButton = document.getElementById('login-button');
-// loginButton.addEventListener('click', openModal);
-window.addEventListener('load', openModal);
-
-function openModal() {
-  MicroModal.show('login-modal');
-};
-
+// GLIDEJS
 const config = {
   type: 'carousel',
   perView: 2,
@@ -30,6 +27,21 @@ const config = {
 };
 
 new Glide('.glide', config).mount();
+
+//GlOBAL VARIABLES
+let tripRepo, traveler, trip;
+
+//LOGIN PAGE
+window.addEventListener('load', openModal);
+const openModalButton = document.getElementById('open-modal-button');
+openModalButton.addEventListener('click', openModal);
+
+function openModal() {
+  MicroModal.show('login-modal');
+};
+
+
+
 
 
 
