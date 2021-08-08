@@ -40,6 +40,18 @@ function openModal() {
   MicroModal.show('login-modal');
 };
 
+//GET DATA FROM LOGIN
+const loginButton = document.getElementById('login-button');
+loginButton.addEventListener('click', getIDFromUsername)
+
+function getIDFromUsername() {
+  const username = document.getElementById('username-input');
+  const password = document.getElementById('password-input');
+
+  traveler = new Traveler(username.input, password.input);
+  traveler.getIDFromUsername();
+  // distributeData();
+}
 
 
 
