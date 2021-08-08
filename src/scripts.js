@@ -53,6 +53,11 @@ function getIDFromUsername() {
   // distributeData();
 }
 
+//GET DATA FROM API
+function retrieveData() {
+  return Promise.all([getData('travelers/${traveler.id}'), getData('trips'), getData('destinations')]);
+}
+
 
 
 
