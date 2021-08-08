@@ -58,6 +58,21 @@ function retrieveData() {
   return Promise.all([getData('travelers/${traveler.id}'), getData('trips'), getData('destinations')]);
 }
 
+//DISTRIBUTE DATA TO GLOBAL VARIABLES
+function distributeData() {
+  retrieveData().then(promiseArray => {
+    const travelerData = promiseArray[0]
+    const allTrips = promiseArray[1].trips;
+    const destinations = promiseArray[2].destinations;
+    
+    tripRepo = new TripRepo(allTrips);
+
+    traveler.name = travelerData.name;
+    traveler.travelerType = travelerData.travelerType;
+    traveler.travelerTrips = tripRepo.getTripsByID(traveler.id)
+
+  }).then(displayDashboard);
+}
 
 
 
