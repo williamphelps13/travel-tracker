@@ -8,38 +8,24 @@ class Traveler {
     this.name = null;
     this.travelerType = null;
     this.travelerTrips = null;
+    this.destinations = null;
     this.pastTrips = [];
-    this.nextTrip = [];
+    this.currentOrNextTrip = [];
     this.upcomingTrips = [];
     this.pendingTrips = [];
     this.totalSpentThisYear = 0;
   }
 
   getIDFromUsername() {
-    this.id = this.username.replace(/\D/g, "");
+    const idString = this.username.replace(/\D/g, "");
+    this.id = parseFloat(idString);
   }
 
-  // getPastTrips() {
-
-  // }
-
-  // getNextTrip() {
-
-  // }
-
-  // getUpcomingTrips() {
-
-  // }
-
-  // getPendingTrips() {
-
-  // }
-
-  // getTotalSpentThisYear() {
-  //   return travelerTrips.reduce((totalSpentThisYear, trip) => {
-
-
-  //     return totalSpentThisYear;
-  //   }, 0)
+  getPastTrips() {
+    this.pastTrips = this.travelerTrips.filter(trip => dayjs(trip.date).add(trip.duration, 'day').isBefore(dayjs())).sort((a,b) => new Date(b.date) - new Date(a.date));
   }
+
+
 }
+
+export default Traveler;
