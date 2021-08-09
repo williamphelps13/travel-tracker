@@ -1,18 +1,15 @@
-
-import {fetchData, postData} from './apiCalls';
-import domUpdates from './domUpdates';
+// IMPORTS
 import './css/base.scss';
 import MicroModal from 'micromodal';
 import Glide from '@glidejs/glide';
+import dayjs from 'dayjs';
+import Traveler from './Traveler'
+import TripRepo from './TripRepo'
+import Trip from './Trip'
+import {getData, postData} from './apiCalls';
+import domUpdates from './domUpdates';
 
-// const loginButton = document.getElementById('login-button');
-// loginButton.addEventListener('click', openModal);
-window.addEventListener('load', openModal);
-
-function openModal() {
-  MicroModal.show('login-modal');
-};
-
+// GLIDEJS
 const config = {
   type: 'carousel',
   perView: 2,
@@ -31,7 +28,65 @@ const config = {
 
 new Glide('.glide', config).mount();
 
+//GlOBAL VARIABLES
+let tripRepo, traveler, trip;
 
+//LOGIN PAGE
+window.addEventListener('load', openModal);
+const openModalButton = document.getElementById('open-modal-button');
+openModalButton.addEventListener('click', openModal);
 
+function openModal() {
+  MicroModal.show('login-modal');
+};
 
+//GET DATA FROM LOGIN
+const loginButton = document.getElementById('login-button');
+loginButton.addEventListener('click', getIDFromUsername)
 
+function getIDFromUsername() {
+  const username = document.getElementById('username-input');
+  const password = document.getElementById('password-input');
+
+  traveler = new Traveler(username.input, password.input);
+  traveler.getIDFromUsername();
+  distributeData();
+}
+
+//GET DATA FROM API
+function retrieveData() {
+  return Promise.all([getData('travelers/${parseInt(traveler.id)}'), getData('trips'), getData('destinations')]);
+}
+
+//DISTRIBUTE DATA TO GLOBAL VARIABLES
+function distributeData() {
+  retrieveData().then(promiseArray => {
+    const travelerData = promiseArray[0];
+    const allTrips = promiseArray[1].trips;
+    const allDestinations = promiseArray[2].destinations;
+    
+    tripRepo = new TripRepo(allTrips);
+
+    traveler.name = travelerData.name;
+    traveler.travelerType = travelerData.travelerType;
+    traveler.travelerTrips = tripRepo.getTripsByID(traveler.id);
+
+    trip = new Trip(allDestinations);
+
+  }).then(displayDashboard);
+}
+
+//ADD TRIP INPUTS
+createTripButton.addEventListener('click', addInputsToTrip)
+
+function addInputsToTrip() {
+  const destinationInput = getElementById('destination-input');
+  const dateInput = getElementById('date-input');
+  const durationInput = getElementById('duration-input');
+  const travelerCountInput = getElementById('travelerCountInput');
+
+  trip.destination = destinationInput.value;
+  trip.date = dateInput.value;
+  trip.duration = durationInput.value;
+  trip.travelerCount = travelerCountInput.value;
+}
