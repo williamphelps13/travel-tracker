@@ -38,6 +38,11 @@ class Traveler {
     }
   }
 
+  getUpcomingTrips() {
+    this.upcomingTrips = this.travelerTrips.filter(trip => trip.status === 'approved' && dayjs(trip.date).isAfter(dayjs())).sort((a,b) => new Date(a.date) - new Date(b.date))
+  }
+
+  
   
 }
 
