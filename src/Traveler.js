@@ -25,7 +25,20 @@ class Traveler {
     this.pastTrips = this.travelerTrips.filter(trip => dayjs(trip.date).add(trip.duration, 'day').isBefore(dayjs())).sort((a,b) => new Date(b.date) - new Date(a.date));
   }
 
+  getCurrentOrNextTrip() {
+    this.currentOrNextTrip = this.travelerTrips.find(trip => {
+      const dayAfterTrip = dayjs(trip.date).add(trip.duration, 'day');
+      const dayBeforeTrip = dayjs(trip.date).subtract(1)
 
+      return dayjs().isAfter(dayBeforeTrip) && dayjs().isBefore(dayAfterTrip);
+    });
+
+    if (!this.currentOrNextTrip) {
+      this.currentOrNextTrip = this.travelerTrips.filter(trip => trip.status === 'approved' && dayjs(trip.date).isAfter(dayjs())).sort((a,b) => new Date(a.date) - new Date(b.date))[0];
+    }
+  }
+
+  
 }
 
 export default Traveler;
