@@ -46,9 +46,19 @@ class Traveler {
     this.pendingTrips = this.travelerTrips.filter(trip => trip.status === 'pending');
   }
 
-  
-  
-  
+  getTotalSpentThisYear() {
+    const pastTripsThisYear = this.travelerTrips.filter(trip => dayjs(trip.date).isBefore(dayjs())).filter(trip => dayjs(trip.date).isAfter(dayjs('2020-12-31')))
+
+    this.totalSpentThisYear = pastTripsThisYear.reduce((totalSpentThisYear, trip) => {
+      this.destinations.forEach(destination => {
+        if (trip.destinationID === destination.id) {
+          totalSpentThisYear += (trip.duration * trip.travelers * destination.estimatedLodgingCostPerDay + trip.travelers * destination.estimatedFlightCostPerPerson);
+        }
+      })
+
+      return totalSpentThisYear;
+    }, 0)
+  }
 }
 
 export default Traveler;
