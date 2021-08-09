@@ -230,6 +230,12 @@ describe('Traveler', () => {
     expect(traveler.pendingTrips).to.deep.equal(pendingTripOfSibby);
   });
 
- 
+  it('should be able to calculate total spent on trips this year', () => {
+    traveler.destinations = destinations;
+    
+    traveler.getTotalSpentThisYear();
+
+    expect(traveler.totalSpentThisYear).to.equal(17635);
+  });
   
 });
