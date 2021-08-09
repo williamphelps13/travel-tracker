@@ -14,5 +14,40 @@ describe('Trip', () => {
     trip.travelerCount = 2;
   }); 
 
-  
+  it('should be a function', () => {
+    expect(Trip).to.be.a('function');
+  });
+
+  it('should be a instance of Traveler', () => {
+    expect(trip).to.be.an.instanceOf(Trip);
+  });
+
+  it('should be able to store all destinations', () => {
+    expect(trip.allDestinations).to.equal(destinations);
+  });
+
+  it('should be able to store a trip destination id from input', () => {
+    expect(trip.destinationID).to.equal(1);
+  });
+
+  it('should be able to store a trip date input', () => {
+    trip.date = '2021/08/13';
+    
+    expect(trip.date).to.equal('2021/08/13');
+  });
+
+  it('should be able to store a trip duration input', () => {
+    expect(trip.duration).to.equal(7);
+  });
+
+  it('should be able to store a trip traveler count input', () => {
+    expect(trip.travelerCount).to.equal(2);
+  });
+
+  it('trip status should be pending by default', () => {
+
+    expect(trip.status).to.equal('pending');
+  });
+
+ 
 });
