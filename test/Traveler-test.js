@@ -147,5 +147,13 @@ describe('Traveler', () => {
 
   }); 
 
-  
+  it('should be a function', () => {
+    expect(Traveler).to.be.a('function');
+  });
+
+  it('should be a instance of Traveler', () => {
+    expect(traveler).to.be.an.instanceOf(Traveler);
+  });
+
+ 
 });
