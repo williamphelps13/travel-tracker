@@ -49,5 +49,29 @@ describe('Trip', () => {
     expect(trip.status).to.equal('pending');
   });
 
- 
+  it('should be able to calculate estimated trip cost', () => {
+    trip.getTripCost();
+
+    expect(trip.tripCost).to.equal(1780);
+  });
+
+  it('should be able to calculate agent fee', () => {
+
+    trip.getTripCost();
+
+    trip.getAgentFee();
+
+    expect(trip.agentFee).to.equal(178);
+  });
+
+  it('should be able to calculate estimated total trip cost', () => {
+
+    trip.getTripCost();
+    
+    trip.getAgentFee();
+  
+    trip.getTotalCost();
+
+    expect(trip.totalCost).to.equal(1958);
+  });
 });
