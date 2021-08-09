@@ -13,6 +13,23 @@ class Trip {
     this.totalCost = null;
   }
   
+  getTripCost() {
+    this.tripCost = this.allDestinations.reduce((tripCost, destination) => {
+      if (this.destinationID === destination.id) {
+        tripCost = this.duration * this.travelerCount * destination.estimatedLodgingCostPerDay + this.travelerCount * destination.estimatedFlightCostPerPerson;
+      }
+
+      return tripCost;
+    }, 0)
+  }
+
+  getAgentFee() {
+    this.agentFee = this.tripCost * .1
+  }
+
+  getTotalCost() {
+    this.totalCost = this.tripCost + this.agentFee;
+  }
 }
 
 export default Trip;
