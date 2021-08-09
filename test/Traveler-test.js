@@ -191,5 +191,11 @@ describe('Traveler', () => {
     expect(traveler.destinations).to.deep.equal(destinations);
   });
 
+  it('should be able to reassign the id to a string of the id', () => {
+    traveler.getIDFromUsername();
+
+    expect(traveler.id).to.equal(3);
+  });
+
   
 });
