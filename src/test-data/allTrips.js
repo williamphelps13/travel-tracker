@@ -1,13 +1,13 @@
-trips: [
+const trips = [
   {
-  id: 1,
-  userID: 44,
-  destinationID: 49,
-  travelers: 1,
-  date: "2022/09/16",
-  duration: 8,
-  status: "approved",
-  suggestedActivities: [ ]
+    id: 1,
+    userID: 3,
+    destinationID: 49,
+    travelers: 1,
+    date: "2021/08/07",
+    duration: 8,
+    status: "approved",
+    suggestedActivities: [ ]
   },
   {
   id: 2,
@@ -31,17 +31,17 @@ trips: [
   },
   {
   id: 4,
-  userID: 43,
+  userID: 3,
   destinationID: 14,
   travelers: 2,
   date: "2022/02/25",
   duration: 10,
-  status: "approved",
+  status: "pending",
   suggestedActivities: [ ]
   },
   {
   id: 5,
-  userID: 42,
+  userID: 3,
   destinationID: 29,
   travelers: 3,
   date: "2022/04/30",
@@ -404,7 +404,7 @@ trips: [
   userID: 3,
   destinationID: 25,
   travelers: 3,
-  date: "2020/08/30",
+  date: "2021/04/30",
   duration: 11,
   status: "approved",
   suggestedActivities: [ ]
@@ -1014,7 +1014,7 @@ trips: [
   userID: 3,
   destinationID: 3,
   travelers: 3,
-  date: "2020/09/26",
+  date: "2021/03/26",
   duration: 8,
   status: "approved",
   suggestedActivities: [ ]
@@ -2000,3 +2000,5 @@ trips: [
   suggestedActivities: [ ]
   }
   ]
+
+export default trips;

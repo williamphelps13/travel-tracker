@@ -1,4 +1,4 @@
-destinations: [
+const destinations = [
   {
   id: 1,
   destination: "Lima, Peru",
@@ -399,3 +399,5 @@ destinations: [
   alt: "person sitting on brown rock in front of small body of water"
   }
   ]
+
+  export default destinations;
