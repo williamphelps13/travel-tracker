@@ -112,5 +112,21 @@ describe('TripRepo', () => {
     ]
   }); 
 
- 
+  it('should be a function', () => {
+    expect(TripRepo).to.be.a('function');
+  });
+
+  it('should be a instance of Traveler', () => {
+    expect(tripRepo).to.be.an.instanceOf(TripRepo);
+  });
+
+  it('should be able to store all trips', () => {
+    expect(tripRepo.allTrips).to.equal(trips);
+  });
+
+  it('should be able to get a particular user\'s trips by their id', () => {
+    const tripsOfID3 = tripRepo.getTripsByID(3)
+
+    expect(tripsOfID3).to.deep.equal(tripsOfSibby);
+  });
 });
