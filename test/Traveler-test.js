@@ -218,6 +218,18 @@ describe('Traveler', () => {
   //   expect(traveler.currentOrNextTrip).to.deep.equal(nextTripOfSibby);
   // });
 
-  
+  it('should be able to reassign upcomingTrips to all trips after today that are not pending', () => {
+    traveler.getUpcomingTrips();
+
+    expect(traveler.upcomingTrips).to.deep.equal(upcomingTripsOfSibby);
+  });
+
+  it('should be able to reassign pendingTrips to all trips that are pending', () => {
+    traveler.getPendingTrips();
+
+    expect(traveler.pendingTrips).to.deep.equal(pendingTripOfSibby);
+  });
+
+ 
   
 });
