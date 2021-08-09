@@ -197,5 +197,27 @@ describe('Traveler', () => {
     expect(traveler.id).to.equal(3);
   });
 
+  it('should be able to reassign pastTrips to all trips before today', () => {
+    traveler.getPastTrips();
+
+    expect(traveler.pastTrips).to.deep.equal(pastTripsOfSibby);
+  });
+
+  it('should be able to reassign currentOrNextTrip to the current trip', () => {
+
+    traveler.getCurrentOrNextTrip();
+
+    expect(traveler.currentOrNextTrip).to.deep.equal(currentTripOfSibby);
+  });
+
+  // it('should be able to reassign currentOrNextTrip to the next trip after today that is not pending if no current trip exists', () => {
+  //   currentTripOfSibby = null;
+
+  //   traveler.getCurrentOrNextTrip();
+
+  //   expect(traveler.currentOrNextTrip).to.deep.equal(nextTripOfSibby);
+  // });
+
+  
   
 });
