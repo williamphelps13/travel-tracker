@@ -155,5 +155,41 @@ describe('Traveler', () => {
     expect(traveler).to.be.an.instanceOf(Traveler);
   });
 
- 
+  it('should be able to store a username', () => {
+    expect(traveler.username).to.equal('traveler3');
+  });
+
+  it('should be able to store a password', () => {
+    expect(traveler.password).to.equal('travel');
+  });
+
+  it('should be able to store an id', () => {
+    traveler.id = travelerData.id;
+
+    expect(traveler.id).to.equal(3);
+  });
+
+  it('should be able to store a name', () => {
+    traveler.name = travelerData.name;
+
+    expect(traveler.name).to.equal('Sibby Dawidowitsch');
+  });
+
+  it('should be able to store traveler type', () => {
+    traveler.travelerType = travelerData.travelerType;
+
+    expect(traveler.travelerType).to.equal('shopper');
+  });
+
+  it('should be able to store all the traveler\'s trips', () => {
+    expect(traveler.travelerTrips).to.deep.equal(tripRepo.getTripsByID(traveler.id));
+  });
+
+  it('should be able to store all destinations', () => {
+    traveler.destinations = destinations;
+    
+    expect(traveler.destinations).to.deep.equal(destinations);
+  });
+
+  
 });
