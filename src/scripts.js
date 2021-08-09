@@ -50,32 +50,43 @@ function getIDFromUsername() {
 
   traveler = new Traveler(username.input, password.input);
   traveler.getIDFromUsername();
-  // distributeData();
+  distributeData();
 }
 
 //GET DATA FROM API
 function retrieveData() {
-  return Promise.all([getData('travelers/${traveler.id}'), getData('trips'), getData('destinations')]);
+  return Promise.all([getData('travelers/${parseInt(traveler.id)}'), getData('trips'), getData('destinations')]);
 }
 
 //DISTRIBUTE DATA TO GLOBAL VARIABLES
 function distributeData() {
   retrieveData().then(promiseArray => {
-    const travelerData = promiseArray[0]
+    const travelerData = promiseArray[0];
     const allTrips = promiseArray[1].trips;
-    const destinations = promiseArray[2].destinations;
+    const allDestinations = promiseArray[2].destinations;
     
     tripRepo = new TripRepo(allTrips);
 
     traveler.name = travelerData.name;
     traveler.travelerType = travelerData.travelerType;
-    traveler.travelerTrips = tripRepo.getTripsByID(traveler.id)
+    traveler.travelerTrips = tripRepo.getTripsByID(traveler.id);
+
+    trip = new Trip(allDestinations);
 
   }).then(displayDashboard);
 }
 
+//ADD TRIP INPUTS
+createTripButton.addEventListener('click', addInputsToTrip)
 
+function addInputsToTrip() {
+  const destinationInput = getElementById('destination-input');
+  const dateInput = getElementById('date-input');
+  const durationInput = getElementById('duration-input');
+  const travelerCountInput = getElementById('travelerCountInput');
 
-
-
-
+  trip.destination = destinationInput.value;
+  trip.date = dateInput.value;
+  trip.duration = durationInput.value;
+  trip.travelerCount = travelerCountInput.value;
+}
