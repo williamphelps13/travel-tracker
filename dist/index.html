@@ -23,29 +23,27 @@
       </div>
     </heading>
     <main>
-      <section class="login hidden">
+      <section class="login-page">
         <div class="modal micromodal-slide" id="login-modal" aria-hidden="true">
           <div class="modal-overlay" tabindex="-1" data-micromodal-close>
             <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
               <header class="modal-header">
-                <h2 class="modal-title" id="login-modal-title">Ready to travel?</h2>
+                <h2 class="modal-title" id="login-modal-title">Ready to travel? Let's get you logged in!</h2>
                 <button class="modal-close" aria-label="Close modal" data-micromodal-close></button>
               </header>
               <section class="modal-content" id="login-modal-content">
-                <p>Try hitting the <code>tab</code> key and notice how the focus stays within the modal itself. Also, <code>esc</code> to close modal.</p>
+                <input class="username-input input" id="usernameInput" name='usernameInput' placeholder="What's your username?" aria-label="username-input">
+                <input class="password-input input" id="passwordInput" name='passwordInput' placeholder="What's your password?" aria-label="password-input">
               </section>
               <footer class="modal-footer">
-                <button class="modal-btn modal__btn-primary">Continue</button>
-                <button class="modal-btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+                <button class="modal-btn modal__btn-primary" id="loginButton">Let's go!</button>
               </footer>
             </div>
           </div>
         </div>
-        <button id="open-modal-button">Lets get planning! - Login</button>
+        <button id="openModalButton">Lets get planning! - Login</button>
       </section>
-      <section class="destinations section-slides-container hidden">
-      </section>
-      <section class="dashboard section-slides-container">
+      <section class="user-page section-slides-container hidden">
         <div class="glide">
           <div data-glide-el="track" class="glide__track">
             <ul class="glide__slides">
@@ -57,10 +55,11 @@
                       <select class="destinations-dropdown input" id="destinationsDropdown" size="10" aria-label="destination-dropdown">
                         <option value="">--Destination--</option>
                       </select>
-                      <input class="party input" id="party" type="number" name='party' placeholder="Party Size!" min="1" max="20" aria-label="party-size">
-                      <input class="start-date input" id="startDate" type="date" name="start-date" aria-label="start-date">
-                      <input class="duration input" id="duration" type="number" name="duration" placeholder="Duration" min="1" max="100" aria-label="duration">
-                      <button class="total-button input" id="totalButton">Get Trip Estimate</button>
+                      <input class="party input" id="party" type="number" name='party' placeholder="Party Size!" min="1" max="20" aria-label="party-size" required>
+                      <input class="start-date input" id="startDate" type="date" name="start-date" aria-label="start-date" min=""required>
+                      <input class="duration input" id="duration" type="number" name="duration" placeholder="Duration" min="1" max="100" aria-label="duration" required>
+                      <button class="estimate-button button input" id="estimateButton">Get Trip Estimate</button>
+                      <button class="submit-button button input" id="submitButton">Submit Trip</button>
                     </section>
                   </form>
                   <h3 class="amount-spent">Trip Estimate: $<span id="tripEstimate"></span></h3>
@@ -69,7 +68,7 @@
               <li class="glide__slide">
                 <section class="section-slides">
                   <h2 class="section-heading">Current or Next Trip</h2>
-                  <h3 class="amount-spent">Amount Spent on Experiences: $<span id="spent"></span></h3>
+                  <h3 class="amount-spent">Amount Spent on Experiences This Year: $<span id="spent"></span></h3>
                   <section class='trips-grid current' id='tripsGridCurrent'>
                   </section>
                 </section>
@@ -108,12 +107,12 @@
             <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
           </div>
           <div class="glide__bullets" data-glide-el="controls[nav]">
-            <button class="glide__bullet" data-glide-dir="=0"></button>
-            <button class="glide__bullet" data-glide-dir="=1"></button>
-            <button class="glide__bullet" data-glide-dir="=2"></button>
-            <button class="glide__bullet" data-glide-dir="=3"></button>
-            <button class="glide__bullet" data-glide-dir="=4"></button>
-            <button class="glide__bullet" data-glide-dir="=6"></button>
+            <button class="glide__bullet" aria-label="Create a Trip Slide" data-glide-dir="=0"></button>
+            <button class="glide__bullet" aria-label="Current or Next Trip Slide" data-glide-dir="=1"></button>
+            <button class="glide__bullet" aria-label="Trips Traveled Slide" data-glide-dir="=2"></button>
+            <button class="glide__bullet" aria-label="Pending and Upcoming Slide" data-glide-dir="=3"></button>
+            <button class="glide__bullet" aria-label="image with people buying oranges and other fruit from a street vendor in marrakesh" data-glide-dir="=4"></button>
+            <button class="glide__bullet" aria-label="city with people walking in crosswalk and brightly lit shops at night in Tokyo" data-glide-dir="=5"></button>
           </div>
         </div>
       </section>
