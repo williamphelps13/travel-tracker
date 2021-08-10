@@ -8,29 +8,146 @@
 
 body {
   font-family: 'EB Garamond', serif;
-  // background-image: url('https://persnicketyformalwear.files.wordpress.com/2016/12/19714080-elegant-wallpaper-design-fancy-background-stock-photo.jpg');
   overflow: hidden;
 }
 
 main {
   height: 80vh;
-  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
-.glide-container {
-  background-color: transparent;
-  height: 60vh;
+.section-slides-container {
+  // height: 60vh;
   width: 100%;
   display: flex;
+  align-items: center;
+  
+}
+
+.section-slides {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 4rem;
+  border: 4px solid black;
+  height: 70vh;
+  width: 100%;
+} 
+
+.section-heading {
+  font-size: 2.5rem;
+  margin-top: 1.5%;
+}
+
+.trips-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(3,1fr);
+  margin: 1%;
+  padding: 1%;
+  font-size: 2rem;
+  height: auto;
+  overflow: auto;
+}
+
+.trips {
+  border: 2px solid black;
+  margin: 10px;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+.trips-image-container {
+  display: flex;
   justify-content: center;
+}
+
+.trips-image {
+  margin: 2%;
+  display: block;
+  max-width: 20vh;
+  max-height: 15vh;
+  width: auto;
+  height: auto;
+}
+
+.current article {
+  border: none;
+  margin-left: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.current article img {
+  display: block;
+  max-width: 40vh;
+  max-height: 40vh;
+  width: auto;
+  height: auto;
+}
+
+.full-slide-image {
+  display: block;
+  margin-top: 2vh;
+  max-width: 100%;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+}
+
+.create-trip-container {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
 }
 
-heading {
-  width: 100%;
+.input {
+  height: 30px;
+  width: 200px;
+  border-radius: 4px;
+  border: 2px solid black;
+}
+
+.destinations-dropdown {
+  height: 100px;
+}
+
+// .party {
+
+// }
+
+
+// }
+// .start-date {
+
+// }
+
+// .duration {
+
+// }
+
+.total-button {
+  display: inline-block;
+  border: none;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.amount-spent {
+  margin-top: 1%;
+  font-size: 1.5rem;
+  font-style: italic;
 }
 
 .heading-quote {
@@ -41,10 +158,10 @@ heading {
 
 .heading-tagline {
   margin-top: 1vh;
-  margin-left: 1vw
+  margin-left: 1vw;
 }
+
 h1 {
-  color: black;
   margin-bottom: 2vh;
   font-size: 4rem;
 }

@@ -17,9 +17,6 @@ const config = {
   animationDuration: 500,
   focusAt: 'center',
   breakpoints: {
-    800: {
-      perView: 2
-    },
     480: {
       perView: 1
     }
@@ -28,37 +25,32 @@ const config = {
 
 new Glide('.glide', config).mount();
 
-//GlOBAL VARIABLES
 let tripRepo, traveler, trip;
 
-//LOGIN PAGE
-window.addEventListener('load', openModal);
-const openModalButton = document.getElementById('open-modal-button');
-openModalButton.addEventListener('click', openModal);
 
-function openModal() {
-  MicroModal.show('login-modal');
-};
+// window.addEventListener('load', openModal);
+// const openModalButton = document.getElementById('openModalButton');
+// openModalButton.addEventListener('click', openModal);
 
-//GET DATA FROM LOGIN
-const loginButton = document.getElementById('login-button');
-loginButton.addEventListener('click', getIDFromUsername)
+// function openModal() {
+//   MicroModal.show('login-modal');
+// };
+
+// const loginButton = document.getElementById('loginButton');
+// loginButton.addEventListener('click', getIDFromUsername)
+
+getIDFromUsername();
 
 function getIDFromUsername() {
-  const username = document.getElementById('username-input');
-  const password = document.getElementById('password-input');
+  // const username = document.getElementById('usernameInput');
+  // const password = document.getElementById('passwordInput');
 
-  traveler = new Traveler(username.input, password.input);
+  traveler = new Traveler('traveler44', 'travel');
   traveler.getIDFromUsername();
+  
   distributeData();
 }
 
-//GET DATA FROM API
-function retrieveData() {
-  return Promise.all([getData('travelers/${parseInt(traveler.id)}'), getData('trips'), getData('destinations')]);
-}
-
-//DISTRIBUTE DATA TO GLOBAL VARIABLES
 function distributeData() {
   retrieveData().then(promiseArray => {
     const travelerData = promiseArray[0];
@@ -69,24 +61,131 @@ function distributeData() {
 
     traveler.name = travelerData.name;
     traveler.travelerType = travelerData.travelerType;
-    traveler.travelerTrips = tripRepo.getTripsByID(traveler.id);
+    traveler.destinations = allDestinations;
 
     trip = new Trip(allDestinations);
 
   }).then(displayDashboard);
 }
 
-//ADD TRIP INPUTS
-createTripButton.addEventListener('click', addInputsToTrip)
+function retrieveData() {
+  return Promise.all([getData(`travelers/${traveler.id}`), getData('trips'), getData('destinations')]);
+}
+
+function displayDashboard() {
+  traveler.travelerTrips = tripRepo.getTripsByID(traveler.id);
+  
+  sortTrips();
+  traveler.getTotalSpentThisYear();
+
+  addDestinations()
+
+  document.getElementById('spent').innerText = traveler.totalSpentThisYear;
+
+  renderTrips(traveler.pastTrips, 'tripsGridPast')
+  renderTrips(traveler.currentOrNextTrip, 'tripsGridCurrent')
+  renderTrips(traveler.upcomingTrips, 'tripsGridUpcoming')
+  renderTrips(traveler.pendingTrips, 'tripsGridPending')
+}
+
+function sortTrips() {
+  traveler.getPastTrips()
+  traveler.getCurrentOrNextTrip()
+  traveler.getUpcomingTrips()
+  traveler.getPendingTrips()
+}
+
+function renderTrips(tripsList, section) {
+  const tripsGrid = document.getElementById(`${section}`);
+  tripsGrid.innerHTML = '';
+
+  tripsList.forEach(trips => {
+  let destinationName, imageURL, imageAlt;
+  
+  trip.allDestinations.forEach(destination => {
+    if (trips.destinationID === destination.id) {
+      destinationName = destination.destination;
+      imageURL = destination.image;
+      imageAlt= destination.alt;
+    }
+  })
+    console.log(traveler);
+    
+    tripsGrid.innerHTML +=
+   `<article class='trips'>
+      <div class='trips-image-container'>
+        <img class='trips-image' src=${imageURL} alt=${imageAlt}>
+      </div>
+      <p>Destination: ${destinationName}</p>
+      <p>Date: ${trips.date}</p>
+      <p>Duration: ${trips.duration}</p>
+      <p>Status: ${trips.status}</p>
+    </article>`
+  })
+}
+
+function addDestinations() {
+  trip.allDestinations.forEach(destination => {
+    document.getElementById('destinationsDropdown').innerHTML += `
+    <option value=${destination.id}>${destination.destination}</option>`
+  })
+}
+
+document.getElementById('totalButton').addEventListener('click', createTrip)
+
+function createTrip() {
+  event.preventDefault();
+
+  addInputsToTrip()
+  trip.getTripCost()
+  trip.getAgentFee()
+  trip.getTotalCost()
+
+  let tripToPost = {
+    id: tripRepo.allTrips.sort((a,b) => b.id - a.id)[0].id + 1,
+    userID: traveler.id,
+    destinationID: trip.destinationID,
+    travelers: trip.travelerCount,
+    date: dayjs(trip.date).format('YYYY/MM/DD'),
+    duration: trip.duration,
+    status: trip.status,
+    suggestedActivities: [ ]
+  }
+  console.log(tripToPost);
+
+  postTrip(tripToPost);
+}
 
 function addInputsToTrip() {
-  const destinationInput = getElementById('destination-input');
-  const dateInput = getElementById('date-input');
-  const durationInput = getElementById('duration-input');
-  const travelerCountInput = getElementById('travelerCountInput');
+  let destinationInput = document.getElementById('destinationsDropdown');
+  let dateInput = document.getElementById('startDate');
+  let durationInput = document.getElementById('duration');
+  let travelerCountInput = document.getElementById('party');
 
-  trip.destination = destinationInput.value;
+  trip.destinationID = parseInt(destinationInput.value);
   trip.date = dateInput.value;
-  trip.duration = durationInput.value;
-  trip.travelerCount = travelerCountInput.value;
+  trip.duration = parseInt(durationInput.value);
+  trip.travelerCount = parseInt(travelerCountInput.value);
+
+  destinationInput.value = "";
+  dateInput.value = "";
+  durationInput.value = "";
+  travelerCountInput.value = "";
+}
+
+function postTrip(tripToPost) {
+  postData(tripToPost).then((response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    } else {
+      document.getElementById('tripEstimate').innerText = trip.totalCost;
+      distributeData();
+      displayDashboard();
+      console.log(traveler);
+    }
+  })
+  .catch(error => {
+    // tripSubmissionNote.innerText = "Could not Fetch :( Check Internet?";
+    console.log(error)
+  })
 }
