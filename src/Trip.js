@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 class Trip {
   constructor(allDestinations) {
     this.allDestinations = allDestinations;
