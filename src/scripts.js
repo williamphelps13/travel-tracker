@@ -1,4 +1,3 @@
-// IMPORTS
 import './css/base.scss';
 import MicroModal from 'micromodal';
 import Glide from '@glidejs/glide';
@@ -9,7 +8,6 @@ import Trip from './Trip'
 import {getData, postData} from './apiCalls';
 import domUpdates from './domUpdates';
 
-// GLIDEJS
 const config = {
   type: 'carousel',
   perView: 2,
@@ -23,32 +21,38 @@ const config = {
   }
 };
 
-new Glide('.glide', config).mount();
+
+
 
 let tripRepo, traveler, trip;
 
+window.addEventListener('load', openModal);
 
-// window.addEventListener('load', openModal);
-// const openModalButton = document.getElementById('openModalButton');
-// openModalButton.addEventListener('click', openModal);
+document.getElementById('openModalButton').addEventListener('click', openModal);
 
-// function openModal() {
-//   MicroModal.show('login-modal');
-// };
+function openModal() {
+  MicroModal.show('login-modal');
+};
 
-// const loginButton = document.getElementById('loginButton');
-// loginButton.addEventListener('click', getIDFromUsername)
+document.getElementById('loginButton').addEventListener('click', getIDFromUsername)
 
-getIDFromUsername();
 
 function getIDFromUsername() {
-  // const username = document.getElementById('usernameInput');
-  // const password = document.getElementById('passwordInput');
+  const username = document.getElementById('usernameInput');
+  const password = document.getElementById('passwordInput');
 
-  traveler = new Traveler('traveler44', 'travel');
+  traveler = new Traveler(username.value, password.value);
+  // traveler = new Traveler('traveler44', 'travel');
   traveler.getIDFromUsername();
+
   
-  distributeData();
+  if (password.value === "travel") {
+    document.querySelector('.login-page').classList.add("hidden");
+    document.querySelector('.user-page').classList.remove("hidden");
+    new Glide('.glide', config).mount();
+
+    distributeData();
+  }
 }
 
 function distributeData() {
@@ -109,8 +113,6 @@ function renderTrips(tripsList, section) {
       imageAlt= destination.alt;
     }
   })
-    console.log(traveler);
-    
     tripsGrid.innerHTML +=
    `<article class='trips'>
       <div class='trips-image-container'>
@@ -126,20 +128,38 @@ function renderTrips(tripsList, section) {
 
 function addDestinations() {
   trip.allDestinations.forEach(destination => {
-    document.getElementById('destinationsDropdown').innerHTML += `
+    destinationInput.innerHTML += `
     <option value=${destination.id}>${destination.destination}</option>`
   })
 }
 
-document.getElementById('totalButton').addEventListener('click', createTrip)
+document.getElementById('estimateButton').addEventListener('click', displayEstimate)
+document.getElementById('submitButton').addEventListener('click', createTrip)
+
+function displayEstimate() {
+  event.preventDefault();
+
+  addInputsToTrip()
+
+  trip.getTripCost()
+  trip.getAgentFee()
+  trip.getTotalCost()
+
+  document.getElementById('tripEstimate').innerText = trip.totalCost;
+}
+
+let destinationInput = document.getElementById('destinationsDropdown');
+let dateInput = document.getElementById('startDate');
+let durationInput = document.getElementById('duration');
+let travelerCountInput = document.getElementById('party');
 
 function createTrip() {
   event.preventDefault();
 
-  addInputsToTrip()
-  trip.getTripCost()
-  trip.getAgentFee()
-  trip.getTotalCost()
+  destinationInput.value = "";
+  dateInput.value = "";
+  durationInput.value = "";
+  travelerCountInput.value = "";
 
   let tripToPost = {
     id: tripRepo.allTrips.sort((a,b) => b.id - a.id)[0].id + 1,
@@ -151,26 +171,16 @@ function createTrip() {
     status: trip.status,
     suggestedActivities: [ ]
   }
-  console.log(tripToPost);
 
   postTrip(tripToPost);
 }
 
 function addInputsToTrip() {
-  let destinationInput = document.getElementById('destinationsDropdown');
-  let dateInput = document.getElementById('startDate');
-  let durationInput = document.getElementById('duration');
-  let travelerCountInput = document.getElementById('party');
 
   trip.destinationID = parseInt(destinationInput.value);
   trip.date = dateInput.value;
   trip.duration = parseInt(durationInput.value);
   trip.travelerCount = parseInt(travelerCountInput.value);
-
-  destinationInput.value = "";
-  dateInput.value = "";
-  durationInput.value = "";
-  travelerCountInput.value = "";
 }
 
 function postTrip(tripToPost) {
@@ -178,14 +188,13 @@ function postTrip(tripToPost) {
     if (!response.ok) {
       throw Error(response.statusText);
     } else {
-      document.getElementById('tripEstimate').innerText = trip.totalCost;
+      
       distributeData();
       displayDashboard();
-      console.log(traveler);
     }
   })
   .catch(error => {
-    // tripSubmissionNote.innerText = "Could not Fetch :( Check Internet?";
+    // .innerText = "Could not Fetch :( Check Internet?";
     console.log(error)
   })
 }
