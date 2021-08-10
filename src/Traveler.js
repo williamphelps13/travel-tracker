@@ -26,28 +26,28 @@ class Traveler {
   }
 
   getCurrentOrNextTrip() {
-    this.currentOrNextTrip = this.travelerTrips.find(trip => {
+    this.currentOrNextTrip = this.travelerTrips.filter(trip => {
       const dayAfterTrip = dayjs(trip.date).add(trip.duration, 'day');
       const dayBeforeTrip = dayjs(trip.date).subtract(1)
 
       return dayjs().isAfter(dayBeforeTrip) && dayjs().isBefore(dayAfterTrip);
     });
 
-    if (!this.currentOrNextTrip) {
-      this.currentOrNextTrip = this.travelerTrips.filter(trip => trip.status === 'approved' && dayjs(trip.date).isAfter(dayjs())).sort((a,b) => new Date(a.date) - new Date(b.date))[0];
+    if (!this.currentOrNextTrip.length) {
+      this.currentOrNextTrip = this.travelerTrips.filter(trip => trip.status === 'approved' && dayjs(trip.date).isAfter(dayjs())).sort((a,b) => new Date(a.date) - new Date(b.date));
     }
   }
 
   getUpcomingTrips() {
-    this.upcomingTrips = this.travelerTrips.filter(trip => trip.status === 'approved' && dayjs(trip.date).isAfter(dayjs())).sort((a,b) => new Date(a.date) - new Date(b.date))
+    this.upcomingTrips = this.travelerTrips.filter(trip => trip.status === 'approved' && dayjs(trip.date).isAfter(dayjs())).sort((a,b) => new Date(a.date) - new Date(b.date));
   }
   
   getPendingTrips() {
-    this.pendingTrips = this.travelerTrips.filter(trip => trip.status === 'pending');
+    this.pendingTrips = this.travelerTrips.filter(trip => trip.status === 'pending').sort((a,b) => new Date(a.date) - new Date(b.date));
   }
 
   getTotalSpentThisYear() {
-    const pastTripsThisYear = this.travelerTrips.filter(trip => dayjs(trip.date).isBefore(dayjs())).filter(trip => dayjs(trip.date).isAfter(dayjs('2020-12-31')))
+    let pastTripsThisYear = this.travelerTrips.filter(trip => dayjs(trip.date).isBefore(dayjs())).filter(trip => dayjs(trip.date).isAfter(dayjs('2020-12-31')))
 
     this.totalSpentThisYear = pastTripsThisYear.reduce((totalSpentThisYear, trip) => {
       this.destinations.forEach(destination => {
