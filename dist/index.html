@@ -32,12 +32,10 @@
               <button class="modal-close" aria-label="Close modal" data-micromodal-close></button>
             </header>
             <section class="modal-content" id="login-modal-content">
-              <input class="username-input input" id="usernameInput" name='usernameInput' placeholder="What's your username?" aria-label="username-input">
-              <input class="password-input input" id="passwordInput" name='passwordInput' placeholder="What's your password?" aria-label="password-input">
+                <input class="username-input input" id="usernameInput" name='usernameInput' placeholder="Username? (required)" aria-label="username-input" aria-required="true" required>
+                <input class="password-input input" id="passwordInput" name='passwordInput' placeholder="Password? (required)" aria-label="password-input" aria-required="true" required>
+                <button class="modal-btn" id="loginButton">Let's go!</button>
             </section>
-            <footer class="modal-footer">
-              <button class="modal-btn" id="loginButton">Let's go!</button>
-            </footer>
           </div>
         </div>
       </div>
@@ -66,11 +64,11 @@
                   <h2 class="section-heading">Create a Trip</h2>
                   <form>
                     <section class="create-trip-container">
-                      <select class="destinations-dropdown input" id="destinationsDropdown" size="10" aria-label="destination-dropdown">
+                      <select class="destinations-dropdown input" id="destinationsDropdown" size="10" aria-label="destination-dropdown" aria-required="true" required>
                         <option value="">--Destination--</option>
                       </select>
-                      <input class="party input" id="party" type="number" name='party' placeholder="Party Size!" min="1" max="20" aria-label="party-size" required>
-                      <input class="start-date input" id="startDate" type="date" name="start-date" aria-label="start-date" min=""required>
+                      <input class="party input" id="party" type="number" name='party' placeholder="Party Size!" min="1" max="20" aria-label="party-size" aria-required="true" required>
+                      <input class="start-date input" id="startDate" type="date" name="start-date" aria-label="start-date" aria-required="true" required>
                       <input class="duration input" id="duration" type="number" name="duration" placeholder="Duration" min="1" max="100" aria-label="duration" required>
                       <button class="estimate-button button input" id="estimateButton">Get Trip Estimate</button>
                       <button class="submit-button button input" id="submitButton">Submit Trip</button>
