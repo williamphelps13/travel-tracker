@@ -34,15 +34,6 @@ let {
 window.addEventListener('load', displayModal);
 document.getElementById('openModalButton').addEventListener('click', displayModal);
 
-// function displayHistoricalWeek(randomHistory) {
-//   domUpdates.renderHistoricalWeek(randomHistory);
-// }
-// const {
-//   hydrationButton,
-//   hydrationInput,
-//   hydrationHeader
-// } = domUpdates;
-
 function displayModal() {
   domUpdates.renderModal()
 }

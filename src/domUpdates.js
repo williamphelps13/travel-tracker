@@ -1,15 +1,6 @@
 import MicroModal from 'micromodal';
 
 const domUpdates = {
-  // renderHistoricalWeek(randomHistory) {
-  //   const historicalWeek = document.querySelectorAll('.historicalWeek');
-  //   historicalWeek.forEach(element => element.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-  // },
-
-  // hydrationButton: document.getElementById('hydrationSubmitButton'),
-  // hydrationInput: document.getElementById('numOunces'),
-  // hydrationHeader: document.getElementById('hydrationFormHeader'),
-
   username: document.getElementById('usernameInput'),
   password: document.getElementById('passwordInput'),
   destinationInput: document.getElementById('destinationsDropdown'),
@@ -74,7 +65,7 @@ const domUpdates = {
     this.dateInput.value = "";
     this.durationInput.value = "";
     this.travelerCountInput.value = "";
-  },
+  }
 }
 
 export default domUpdates;
