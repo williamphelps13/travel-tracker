@@ -85,9 +85,10 @@ describe('Traveler', () => {
         status: "approved",
         suggestedActivities: [ ]
       }
-    ]
+    ];
 
-    currentTripOfSibby = {
+    currentTripOfSibby = [
+      {
       id: 1,
       userID: 3,
       destinationID: 49,
@@ -96,9 +97,11 @@ describe('Traveler', () => {
       duration: 8,
       status: "approved",
       suggestedActivities: [ ]
-    };
+      }
+    ];
 
-    nextTripOfSibby = {
+    nextTripOfSibby = [
+      {
         id: 5,
         userID: 3,
         destinationID: 29,
@@ -107,7 +110,8 @@ describe('Traveler', () => {
         duration: 18,
         status: "approved",
         suggestedActivities: [ ]
-    };
+      }
+    ];
 
     upcomingTripsOfSibby = [
       {
@@ -130,7 +134,7 @@ describe('Traveler', () => {
         status: "approved",
         suggestedActivities: [ ]
       }
-      ]
+      ];
       
       pendingTripOfSibby = [
         {
@@ -143,7 +147,7 @@ describe('Traveler', () => {
           status: "pending",
           suggestedActivities: [ ]
         }
-      ]
+      ];
 
   }); 
 
@@ -158,13 +162,23 @@ describe('Traveler', () => {
   it('should be able to store a username', () => {
     expect(traveler.username).to.equal('traveler3');
   });
-
+  
   it('should be able to store a password', () => {
     expect(traveler.password).to.equal('travel');
   });
-
+  
   it('should be able to store an id', () => {
     traveler.id = travelerData.id;
+    
+    expect(traveler.id).to.equal(3);
+  });
+  
+  it('should be able to store an id even if the id is not at the end of the username', () => {
+    const username = '3traveler';
+    const password = 'travel';
+
+    traveler = new Traveler(username, password);
+    traveler.getIDFromUsername();
 
     expect(traveler.id).to.equal(3);
   });
@@ -203,6 +217,81 @@ describe('Traveler', () => {
     expect(traveler.pastTrips).to.deep.equal(pastTripsOfSibby);
   });
 
+  it('should be able to reassign past trips as most recent trip first no matter what order the trips are given in', () => {
+
+    let unorderedPastTripsOfSibby = [
+      {
+        id: 50,
+        userID: 3,
+        destinationID: 16,
+        travelers: 5,
+        date: "2020/07/02",
+        duration: 17,
+        status: "approved",
+        suggestedActivities: [ ]
+      },
+      {
+        id: 41,
+        userID: 3,
+        destinationID: 25,
+        travelers: 3,
+        date: "2021/04/30",
+        duration: 11,
+        status: "approved",
+        suggestedActivities: [ ]
+      },
+      {
+        id: 102,
+        userID: 3,
+        destinationID: 3,
+        travelers: 3,
+        date: "2021/03/26",
+        duration: 8,
+        status: "approved",
+        suggestedActivities: [ ]
+      }
+    ];
+
+    let orderedPastTripsOfSibby = [
+      {
+        id: 41,
+        userID: 3,
+        destinationID: 25,
+        travelers: 3,
+        date: "2021/04/30",
+        duration: 11,
+        status: "approved",
+        suggestedActivities: [ ]
+      },
+      {
+        id: 102,
+        userID: 3,
+        destinationID: 3,
+        travelers: 3,
+        date: "2021/03/26",
+        duration: 8,
+        status: "approved",
+        suggestedActivities: [ ]
+      },
+      {
+        id: 50,
+        userID: 3,
+        destinationID: 16,
+        travelers: 5,
+        date: "2020/07/02",
+        duration: 17,
+        status: "approved",
+        suggestedActivities: [ ]
+      }
+    ];
+
+    tripRepo = new TripRepo(unorderedPastTripsOfSibby);
+    traveler.travelerTrips = tripRepo.getTripsByID(traveler.id);
+    traveler.getPastTrips();
+
+    expect(traveler.pastTrips).to.deep.equal(orderedPastTripsOfSibby);
+  });
+
   it('should be able to reassign currentOrNextTrip to the current trip', () => {
 
     traveler.getCurrentOrNextTrip();
@@ -210,13 +299,47 @@ describe('Traveler', () => {
     expect(traveler.currentOrNextTrip).to.deep.equal(currentTripOfSibby);
   });
 
-  // it('should be able to reassign currentOrNextTrip to the next trip after today that is not pending if no current trip exists', () => {
-  //   currentTripOfSibby = null;
+  it('should be able to reassign currentOrNextTrip to the next trip with updated trip data', () => {
 
-  //   traveler.getCurrentOrNextTrip();
+    const newNextTripPlusOthers = [
+      {
+        id: 50,
+        userID: 3,
+        destinationID: 16,
+        travelers: 5,
+        date: "2021/08/15",
+        duration: 17,
+        status: "approved",
+        suggestedActivities: [ ]
+      },
+      {
+        id: 5,
+        userID: 3,
+        destinationID: 29,
+        travelers: 3,
+        date: "2022/04/30",
+        duration: 18,
+        status: "approved",
+        suggestedActivities: [ ]
+      },
+      {
+        id: 3,
+        userID: 3,
+        destinationID: 22,
+        travelers: 4,
+        date: "2022/05/22",
+        duration: 17,
+        status: "approved",
+        suggestedActivities: [ ]
+      }
+    ];
 
-  //   expect(traveler.currentOrNextTrip).to.deep.equal(nextTripOfSibby);
-  // });
+    tripRepo = new TripRepo(newNextTripPlusOthers);
+    traveler.travelerTrips = tripRepo.getTripsByID(traveler.id);
+    traveler.getCurrentOrNextTrip();
+
+    expect(traveler.currentOrNextTrip).to.deep.equal(newNextTripPlusOthers);
+  });
 
   it('should be able to reassign upcomingTrips to all trips after today that are not pending', () => {
     traveler.getUpcomingTrips();
