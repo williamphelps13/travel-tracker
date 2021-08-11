@@ -168,30 +168,6 @@ h1 {
   font-style: $emphasize-font;
 }
 
-.hidden {
-  display: none!important;
-}
-        
-@media screen and (max-width: 800px) {
-  .trips-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-  }
-
-  .quote {
-    display: none!important;
-  }
-
-  .pending-section {
-    height: 50%;
-  }
-
-  .glide__arrows {
-    display: none!important;
-  }
-}
-
 .login-page {
   overflow: hidden;
 }
@@ -221,4 +197,36 @@ h1 {
 
 .open-modal-button {
   margin-top: 1%;
+}
+
+@media screen and (max-width: 800px) {
+  .trips-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .quote {
+    display: none!important;
+  }
+
+  .glide__arrows {
+    display: none!important;
+  }
+
+  .pending-section {
+    height: 50%;
+  }  
+  
+  .modal-container {
+    margin-top: 15%;
+    width: 80vw;
+    height: 60vh;
+    border-radius: 15px;
+    box-sizing: border-box;
+  }
+}
+
+.hidden {
+  display: none!important;
 }
