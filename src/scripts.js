@@ -43,7 +43,6 @@ document.getElementById('loginButton').addEventListener('click', getIDFromUserna
 
 function getIDFromUsername() {
   traveler = new Traveler(username.value, password.value);
-  // traveler = new Traveler('traveler44', 'travel');
   traveler.getIDFromUsername();
 
   if (password.value === 'travel') {
