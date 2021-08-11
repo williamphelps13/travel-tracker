@@ -23,26 +23,40 @@
       </div>
     </heading>
     <main>
-      <section class="login-page">
-        <div class="modal micromodal-slide" id="login-modal" aria-hidden="true">
-          <div class="modal-overlay" tabindex="-1" data-micromodal-close>
-            <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
-              <header class="modal-header">
-                <h2 class="modal-title" id="login-modal-title">Ready to travel? Let's get you logged in!</h2>
-                <button class="modal-close" aria-label="Close modal" data-micromodal-close></button>
-              </header>
-              <section class="modal-content" id="login-modal-content">
-                <input class="username-input input" id="usernameInput" name='usernameInput' placeholder="What's your username?" aria-label="username-input">
-                <input class="password-input input" id="passwordInput" name='passwordInput' placeholder="What's your password?" aria-label="password-input">
-              </section>
-              <footer class="modal-footer">
-                <button class="modal-btn modal__btn-primary" id="loginButton">Let's go!</button>
-              </footer>
-            </div>
+    <section class="login-page">
+      <div class="modal micromodal-slide" id="login-modal" aria-hidden="true">
+        <div class="modal-overlay" tabindex="-1" data-micromodal-close>
+          <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
+            <header class="modal-header">
+              <h2 class="modal-title" id="login-modal-title">Ready for your next adventure?</h2>
+              <button class="modal-close" aria-label="Close modal" data-micromodal-close></button>
+            </header>
+            <section class="modal-content" id="login-modal-content">
+              <input class="username-input input" id="usernameInput" name='usernameInput' placeholder="What's your username?" aria-label="username-input">
+              <input class="password-input input" id="passwordInput" name='passwordInput' placeholder="What's your password?" aria-label="password-input">
+            </section>
+            <footer class="modal-footer">
+              <button class="modal-btn" id="loginButton">Let's go!</button>
+            </footer>
           </div>
         </div>
-        <button id="openModalButton">Lets get planning! - Login</button>
-      </section>
+      </div>
+      <section class="login-background-collage">
+        <div class="row-collage">
+          <img class= "collage-image" src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="opera house and city buildings on the water with boats in Sydney">
+          <img class= "collage-image" src="https://images.unsplash.com/photo-1559113202-c916b8e44373?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="brown concrete gate in Belgium">
+          <img class= "collage-image" src="https://images.unsplash.com/photo-1517821362941-f7f753200fef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80" alt="people buying oranges and other fruit from a street vendor in marrakesh">
+          <img class= "collage-image" src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1390&q=80" alt="landscape photo of cityscape in Zurich">	
+        </div>
+        <div class="row-collage">
+          <img class= "collage-image" src="https://images.unsplash.com/photo-1580237541049-2d715a09486e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2090&q=80" alt="white and brown concrete buildings near sea under white clouds during daytime in Puerto Rico">	
+          <img class= "collage-image" src="https://images.unsplash.com/photo-1539980307411-6820f89db71b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1374&q=80" alt="birds eye photography of body of water in Victoria">
+          <img class= "collage-image" src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1971&q=80" alt="city with people walking in crosswalk and brightly lit shops at night in Tokyo">
+          <img class= "collage-image" src="https://images.unsplash.com/photo-1557129604-0e50f1300fab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" alt="boats docked beside trees on river in Jamaica">	
+        </div>
+        <button class="open-modal-button modal-btn" id="openModalButton">Open Login</button>
+      </section> 
+    </section>
       <section class="user-page section-slides-container hidden">
         <div class="glide">
           <div data-glide-el="track" class="glide__track">
@@ -91,12 +105,12 @@
                 </section>
               </li>
               <li class="glide__slide">
-                <section class="section-slides">
+                <section class="section-slides full-image-slide">
                   <img class= "full-slide-image" src="https://images.unsplash.com/photo-1517821362941-f7f753200fef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80" alt="people buying oranges and other fruit from a street vendor in marrakesh">
                 </section>
               </li>
               <li class="glide__slide">
-                <section class="section-slides">
+                <section class="section-slides full-image-slide">
                   <img class= "full-slide-image" src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1971&q=80" alt="city with people walking in crosswalk and brightly lit shops at night in Tokyo">	
                 </section>
               </li>
