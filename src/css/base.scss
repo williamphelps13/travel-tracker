@@ -21,7 +21,6 @@ body {
   }
 }
 
-
 .section-slides {
   @include flex-column;
   justify-content: flex-start;
@@ -79,11 +78,17 @@ body {
   @include auto-height-width();
 }
 
+.full-image-slide {
+  @include flex-column;
+  justify-content: center;
+  align-items: center;
+}
+
 .full-slide-image {
   display: block;
-  margin-top: 2vh;
   max-width: 100%;
   max-height: 70vh;
+  padding: 0% 3% 0% 3%;
   @include auto-height-width();
 }
 
@@ -185,4 +190,35 @@ h1 {
   .glide__arrows {
     display: none!important;
   }
+}
+
+.login-page {
+  overflow: hidden;
+}
+
+.login-background-collage {
+  margin: 1% 1% 0% 1%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-collage {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.collage-image {
+  margin: 1% .5% 0% .5%; 
+  max-width: 35vw;
+  max-height: 35vh;
+  @include auto-height-width();
+}
+
+.open-modal-button {
+  margin-top: 1%;
 }
