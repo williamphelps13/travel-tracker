@@ -1,29 +1,6 @@
-.modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 5%;
-}
-
-
-.modal-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .username-input {
   margin: 5%;
 }
-
-.password-input {
-
-}
-
-.modal-btn {
-  
-}
-
 
 .modal-overlay {
   position: fixed;
@@ -44,6 +21,7 @@
   height: 40vh;
   border-radius: 15px;
   box-sizing: border-box;
+  overflow: auto;
 }
 
 .modal-header {
@@ -68,10 +46,15 @@
 
 .modal-content {
   color: rgba(0,0,0,.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3%;
 }
 
 .modal-btn {
   font-size: 1rem;
+  margin-top: 1.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: .5rem;
