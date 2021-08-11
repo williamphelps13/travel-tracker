@@ -1,9 +1,19 @@
-.modal-title {
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5%;
+}
 
+
+.modal-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .username-input {
-
+  margin: 5%;
 }
 
 .password-input {
@@ -44,7 +54,7 @@
 
 .modal-title {
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 2rem;
   color: black;
   box-sizing: border-box;
 }

@@ -2,61 +2,54 @@
 @import '_reset';
 @import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
 @import 'node_modules/@glidejs/glide/src/assets/sass/glide.theme';
-@import '_colors';
-@import '_carousel';
+@import '_colors-fonts';
+@import '_mixins';
 @import '_modal';
 
 body {
-  font-family: 'EB Garamond', serif;
-  overflow: hidden;
-}
+  font-family: $main-font;
 
-main {
-  height: 80vh;
-  display: flex;
-  align-items: center;
-}
-
-.section-slides-container {
-  // height: 60vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
+  main {
+    height: 80vh;
+    display: flex;
+    align-items: center;
   
+
+    .section-slides-container {
+      width: 100%;
+    }
+  }
 }
+
 
 .section-slides {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   justify-content: flex-start;
   align-items: center;
-  font-size: 4rem;
   border: 4px solid black;
-  height: 70vh;
-  width: 100%;
+  height: 75vh;
 } 
 
 .section-heading {
   font-size: 2.5rem;
-  margin-top: 1.5%;
+  margin-top: 1%;
+  text-align: center;
 }
 
 .trips-grid {
   display: grid;
   grid-template-columns: repeat(3,1fr);
   grid-template-rows: repeat(3,1fr);
-  margin: 1%;
-  padding: 1%;
+  text-align: center;
+  margin: .5%;
   font-size: 2rem;
-  height: auto;
   overflow: auto;
 }
 
 .trips {
-  border: 2px solid black;
-  margin: 10px;
-  padding: 10px;
+  margin: 2%;
   font-size: 1.2rem;
+  font-style: $emphasize-font;
 }
 
 .trips-image-container {
@@ -66,27 +59,24 @@ main {
 
 .trips-image {
   margin: 2%;
-  display: block;
-  max-width: 20vh;
+  max-width: 20vw;
   max-height: 15vh;
-  width: auto;
-  height: auto;
+  @include auto-height-width();
+  box-shadow: 9px 11px 13px -1px rgba(166,157,157,0.6);
+    -webkit-box-shadow: 9px 11px 13px -1px rgba(166,157,157,0.6);
+    -moz-box-shadow: 9px 11px 13px -1px rgba(166,157,157,0.6);
 }
 
-.current article {
-  border: none;
-  margin-left: 40%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.current {
+  margin-top: 2%;
+  @include flex-column;
+
 }
 
 .current article img {
-  display: block;
-  max-width: 40vh;
+  max-width: 40vw;
   max-height: 40vh;
-  width: auto;
-  height: auto;
+  @include auto-height-width();
 }
 
 .full-slide-image {
@@ -94,14 +84,12 @@ main {
   margin-top: 2vh;
   max-width: 100%;
   max-height: 70vh;
-  width: auto;
-  height: auto;
+  @include auto-height-width();
 }
 
 .create-trip-container {
   height: 50vh;
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   justify-content: space-around;
   align-items: center;
 }
@@ -117,37 +105,19 @@ main {
   height: 100px;
 }
 
-// .party {
-
-// }
-
-
-// }
-// .start-date {
-
-// }
-
-// .duration {
-
-// }
-
 .button {
-  display: inline-block;
   border: none;
-  margin: 0;
-  text-decoration: none;
-  background: #0069ed;
+  background: $button-background-color;
   color: #ffffff;
-  font-family: sans-serif;
   font-size: 1rem;
-  cursor: pointer;
   text-align: center;
 }
 
 .amount-spent {
   margin-top: 1%;
   font-size: 1.5rem;
-  font-style: italic;
+  font-style: $emphasize-font;
+  text-align: center;
 }
 
 .heading-quote {
@@ -162,20 +132,20 @@ main {
 }
 
 h1 {
+  color: $heading-color;
   margin-bottom: 2vh;
   font-size: 4rem;
 }
 
 .thrive {
   font-size: 1.5rem;
-  font-style: italic;
+  font-style: $emphasize-font;
 }
 
 .quote {
   height: 15vh;
   width: 20vw;
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   justify-content: space-around;
   align-items: flex-start;
 }
@@ -190,11 +160,29 @@ h1 {
 
 .definition {
   font-size: 1rem;
-  font-style: italic;
+  font-style: $emphasize-font;
 }
 
 .hidden {
   display: none!important;
 }
         
+@media screen and (max-width: 800px) {
+  .trips-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
 
+  .quote {
+    display: none!important;
+  }
+
+  .pending-section {
+    height: 50%;
+  }
+
+  .glide__arrows {
+    display: none!important;
+  }
+}
