@@ -1,0 +1,9 @@
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin auto-height-width() {
+  width: auto;
+  height: auto;
+}
