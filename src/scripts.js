@@ -31,21 +31,25 @@ let {
   travelerCountInput,
 } = domUpdates;
 
-window.addEventListener('load', displayModal);
-document.getElementById('openModalButton').addEventListener('click', displayModal);
+// window.addEventListener('load', displayModal);
+// document.getElementById('openModalButton').addEventListener('click', displayModal);
 
-function displayModal() {
-  domUpdates.renderModal()
-}
+// function displayModal() {
+//   domUpdates.renderModal()
+// }
 
-document.getElementById('loginButton').addEventListener('click', getIDFromUsername)
+// document.getElementById('loginButton').addEventListener('click', getIDFromUsername)
 
+getIDFromUsername()
 
 function getIDFromUsername() {
-  traveler = new Traveler(username.value, password.value);
+  username = 'traveler44';
+  password = 'travel';
+
+  traveler = new Traveler(username, password);
   traveler.getIDFromUsername();
 
-  if (password.value === 'travel') {
+  if (password === 'travel') {
     domUpdates.renderHideLogin();
     new Glide('.glide', config).mount();
     distributeData();
